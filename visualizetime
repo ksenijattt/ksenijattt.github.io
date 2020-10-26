@@ -1,0 +1,123 @@
+var secondsRadius;
+var prevSec;
+var strokeWeightDefault = 0.1;
+
+function setup() {
+	createCanvas (1320,500);
+	background(0);
+
+	c1x = 180;
+	c1y = 250;
+
+	c2x = 420;
+	c2y = 250;
+
+	c3x = 660;
+	c3y = 250;
+
+	c4x = 900;
+	c4y = 250;
+
+	c5x = 1140;
+	c5y = 250;
+
+	stroke(255);
+	secondsRadius = 60;
+
+	tacke();
+
+
+}
+
+function draw() {
+	//background(0, 4);
+
+	var hr = hour();
+	var mn = minute();
+	var sc = second();
+	var dy = day();
+	var mth = month();
+
+	var hrAngle = radians(map(hr, 0, 24, 0, 360));
+	var mnAngle = radians(map(mn, 0, 60, 0, 360));
+	var scAngle = radians(map(sc, 0, 60, 0, 360));
+	var dyAngle = radians(map(dy, 0, 30, 0, 360));
+	var mthAngle = radians(map(mth, 0, 12, 0, 360));
+  
+
+  if (prevSec != sc) {
+
+  	
+
+  		noFill();
+	  stroke(255);
+	  strokeWeight(strokeWeightDefault);
+	  beginShape();
+	  curveVertex(0, height/2);
+	  curveVertex(c1x + cos(scAngle - PI/2) * secondsRadius, c1y + sin(scAngle - PI/2) * secondsRadius);
+	  curveVertex(c2x + cos(mnAngle - PI/2) * secondsRadius, c2y + sin(mnAngle - PI/2) * secondsRadius);
+	  curveVertex(c3x + cos(hrAngle - PI/2) * secondsRadius, c3y + sin(hrAngle - PI/2) * secondsRadius);
+	  curveVertex(c4x + cos(dyAngle - PI/2) * secondsRadius, c4y + sin(dyAngle - PI/2) * secondsRadius);
+	  curveVertex(c5x + cos(mthAngle - PI/2) * secondsRadius, c5y + sin(mthAngle - PI/2) * secondsRadius);
+	  curveVertex(width, height/2);
+	  endShape();
+
+  }
+  prevSec = sc;
+
+
+}
+
+function tacke() {
+	stroke(255, 100);
+	strokeWeight(strokeWeightDefault);
+	  beginShape(POINTS);
+	  for (var a = 0; a < 360; a+=6) {
+	    var angle = radians(a);
+	    var x = c1x + cos(angle) * secondsRadius;
+	    var y = c1y + sin(angle) * secondsRadius;
+	    vertex(x, y);
+	  }
+	  endShape();
+
+	    strokeWeight(strokeWeightDefault);
+	  beginShape(POINTS);
+	  for (var a = 0; a < 360; a+=6) {
+	    var angle = radians(a);
+	    var x = c2x + cos(angle) * secondsRadius;
+	    var y = c2y + sin(angle) * secondsRadius;
+	    vertex(x, y);
+	  }
+	  endShape();
+	    
+
+	  strokeWeight(strokeWeightDefault);
+	  beginShape(POINTS);
+	  for (var a = 0; a < 360; a+=15) {
+	    var angle = radians(a);
+	    var x = c3x + cos(angle) * secondsRadius;
+	    var y = c3y + sin(angle) * secondsRadius;
+	    vertex(x, y);
+	  }
+	  endShape();
+
+	    strokeWeight(strokeWeightDefault);
+	  beginShape(POINTS);
+	  for (var a = 0; a < 360; a+=360/31) {
+	    var angle = radians(a);
+	    var x = c4x + cos(angle) * secondsRadius;
+	    var y = c4y + sin(angle) * secondsRadius;
+	    vertex(x, y);
+	  }
+	  endShape();
+
+	    strokeWeight(strokeWeightDefault);
+	  beginShape(POINTS);
+	  for (var a = 0; a < 360; a+=30) {
+	    var angle = radians(a);
+	    var x = c5x + cos(angle) * secondsRadius;
+	    var y = c5y + sin(angle) * secondsRadius;
+	    vertex(x, y);
+	  }
+	  endShape();
+}
